@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>图片上传</title>
+		<link rel="stylesheet" href="../themes/default/default.css" />
+		<script src="../kindeditor.js"></script>
+		<script src="../lang/zh_CN.js"></script>
+		<!--
+		必须引入jquery,后面的循环和赋值需要用到
+		1.循环上传按钮、
+		2.每个上传按钮的点击事件
+		建议点击按钮的class有upload_img
+		注意：点击按钮之前要用一个input来存放文件的路径
+			input之前需要一个img来显示图片
+		-->
+		<script src="../jquery.js"></script>
+		<script>
+			KindEditor.ready(function(K) {
+				var editor = K.editor({
+					allowFileManager : true
+				});
+				$(".upload_img").each(function(k,v){ //循环上传按钮、
+					$(v).click(function(){ //每个上传按钮的点击事件
+						editor.loadPlugin('image', function() {
+							editor.plugin.imageDialog({
+								imageUrl:$(v).prev().val(),
+								clickFn : function(url, title, width, height, border, align) {
+									$(v).prev().val(url); //为他之前的input赋值
+									$(v).prev().prev().attr("src",url); //为他之前的之前的img赋值
+									editor.hideDialog();
+								}
+							});
+						});
+					});
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<p>
+			<img src="" style="max-width:100px;">
+			<input type="hidden" name="img1" value="" /> 
+			<input type="button" class="upload_img" value="选择图片1" />
+		</p>
+		<p>
+			<img src="" style="max-width:100px;">
+			<input type="hidden" name="img2" value="" /> 
+			<input type="button" class="upload_img" value="选择图片2" />
+		</p>
+		<p>
+			<img src="" style="max-width:100px;">
+			<input type="hidden" name="img3" value="" /> 
+			<input type="button" class="upload_img" value="选择图片3" />
+		</p>
+		<p>
+			<img src="" style="max-width:100px;">
+			<input type="hidden" name="img4" value="" /> 
+			<input type="button" class="upload_img" value="选择图片4" />
+		</p>
+</body>
+</html>

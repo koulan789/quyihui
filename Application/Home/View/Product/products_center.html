@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>产品中心</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>content.css"/>
+
+
+<style type="text/css">
+
+</style>
+
+</head>
+
+<body>
+<include file="Public/head"/>
+	<div class="content cent">
+		<div class="products">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>产品中心</p>
+					<span>Product Center</span>
+				</div>
+				<div class="sub_nav fleft">
+					<ul>					<volist name="pronav" id="vo1">						<li <if condition="$vo1.id eq $p_id">id="sub_nav_first"<elseif condition="$vo1.name eq $b" />class="last"</if>><a href="{:U('Product/products?id='.$vo1['id'])}">{$vo1.name}</a></li>					</volist> 
+					</ul>
+				</div>
+				<div class="local fright">
+					<img src="<?php echo __IMG ;?>locol.png" alt="" />
+					| <a href="__MODULE__/Index/index">首页</a> | <a href="__MODULE__/Product/products">产品中心</a> | <a href="__MODULE__/Product/products">最新产品</a> | <a href="__MODULE__/Product/products_center">产品详情</a>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">			<form action="{:U('User/order_confirm')}" method="post">
+				<div class="article_scro">				<input type="hidden" value="{$product_id}" name="product_id">
+					<div class="inbox" id="box">
+						<div class="pro_right">
+						<div style="width:400px;height:450px;margin-top:-60px" >							<div style="width:400px;height:400px">							<foreach name="product" item="val">
+									<img src="{$val.img1}" alt="" style="width:400px;height:400px"/>
+									<img src="{$val.img2}" alt="" style="width:400px;height:400px"/>
+									<img src="{$val.img3}" alt="" style="width:400px;height:400px"/>							</foreach>
+								</div>
+								
+								<ul class="pro_center_img">								<foreach name="product" item="va">
+									<li><img src="{$va.img1}" alt="" style="width:100px;height:120px"/></li>										 
+									<li><img src="{$va.img2}" alt="" style="width:100px;height:120px"/></li>
+									<li><img src="{$va.img3}" alt="" style="width:100px;height:120px"/></li>								</foreach>
+								</ul>
+							</div>
+						</div>
+						<div class="pro_infor">						<foreach name="product" item="vl">
+							<div>							
+								<h3>{$vl.p_name} {$vl.name}</h3>
+								<div class="pro_istyle">
+									<p>颜色：</p>
+									<p>{$vl.p_color1} <img src="{$vl.color_img1}" style="width:50px;height:40px" value="{$vl.p_color1}" id="img1"/></p>														
+									<p>{$vl.p_color2}<img src="{$vl.color_img2}" style="width:50px;height:40px" value="{$vl.p_color2}" id="img2"/></p>														<input type="hidden" name="image" value="">
+								</div>
+								<div class="pro_isize">
+									<p>尺码：</p>
+									<p>									<volist name="psize" id="v">
+										<span value="{$v}"<if condition="in_array($v,$vl['size'])"><else />class="pro_disabled"></if> >{$v}</span>									</volist>										<input type="hidden" name="size" value="">
+									</p>
+								</div>
+								<div class="pro_inum">
+									数量：<span id="add">+</span><span id="num">1</span><span id="cut">-</span>										<input type="hidden" name="num" value="1">
+								</div>
+								<div class="pro_ito">
+									<p>运费：<span>浙江温州 至 </span>
+										<select name="">
+											<option value="1">南宁</option>
+										</select>
+										<span>快递:10.00元</span>
+									</p>
+								</div>
+								<div class="pro_imore">
+									<div><span>具体描述</span><span>采用原料</span></div>	
+									<p>{$vl.p_introduce}</p>
+									<p class="last">{$vl.p_source}</p>
+								</div>
+								<div class="pro_ibtn">
+									<div>
+										<input type="button" class="btn btn-default add_cart" value="加入购物车" id="btn1">
+									</div>
+									<div>
+										<input type="submit" class="btn btn-default buy_now fright" value="立即购买" id="btn2">
+									</div>
+								</div>
+							</div>						</foreach>
+						</div>
+					</div>
+				</div>			</form>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/>
+<script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script><script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script><script>var p_id={$product_id};//产品详情页，增加产品数量var num = $("#num").text();//确定选中图片      bind() 方法为被选元素添加一个或多个事件处理程序，并规定事件发生时运行的函数。var img='';var size='';//确定选中图片$("span").click(function(){	 $(this).each(function(){	    size=$(this).attr('value');	    $("input[name='size']").attr("value",size);	})})$("#img1").click(function(){	img=$("#img1").attr("value");	$("input[name='image']").attr("value",img);})$("#img2").click(function(){	img=$("#img2").attr("value");	$("input[name='image']").attr("value",img);})//确定选中尺码$("#add").click(function(){	num++;	$("input[name='num']").attr("value",num);});$("#cut").click(function(){	num--;	if(num<1){num=1;}	$("input[name='num']").attr("value",num);});$('#btn1').click(function(){	var img=$('input[name="image"]').val();	var size=$('input[name="size"]').val();	if(img==''){		alert("请选择颜色！！");		return false;	}	if(size==''){		alert("请选择尺码！！");		return false;	}	$.post('{:U("Product/addcart")}',{num:num,img:img,size:size,product_id:p_id},function(data){		if(data==-1){			alert ("请先登录，再进行其他操作");			location.assign("{:U('User/userlogin')}");		}else if(data==0){			alert ("添加购物车失败");		}else if(data==1){			alert ("添加购物车成功   (如需查看详情，请到会员中心得到  购物车页面  查看)");			location.reload();		}	},'json')})$('#btn2').click(function(){	var img=$('input[name="image"]').val();	var size=$('input[name="size"]').val();	if(img==''){		alert("请选择颜色！！");		return false;	}	if(size==''){		alert("请选择尺码！！");		return false;	}})</script>

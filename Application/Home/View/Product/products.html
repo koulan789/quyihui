@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>产品中心</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>content.css"/>
+
+
+<style type="text/css">
+	body{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat center top;}
+	.article{background: rgba(51,51,51,0.3);}
+	@media (max-width: 768px) {
+		body{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -1350px top;background-size: 1200%;}
+		.box_blur{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -920px -295px;}
+		.footer{bottom: -935px;}
+	}
+	@media (min-width: 769px) and (max-width: 992px) {
+		body{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -800px top;background-size: 300%;}
+		.box_blur{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -517px -270px;}
+		.footer{bottom: -175px;}
+	}
+	@media (min-width: 993px) and (max-width: 1200px) {
+		.box_blur{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -470px -270px;}
+	}
+	@media (min-width: 1200px) {
+		.box_blur{background: url(<?php echo __IMG ;?>bg-pro.png) no-repeat -360px -270px;}
+	}
+</style>
+
+</head>
+
+<body>
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">	
+		<div class="products">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>产品中心</p>
+					<span>Product Center</span>
+				</div>
+				<div class="sub_nav fleft">
+					<ul>					<volist name="procate" id="vo1">						<li <if condition="$vo1.id eq $id">id="sub_nav_first"<elseif condition="$vo1.name eq $b" />class="last"</if>><a href="{:U('Product/products?id='.$vo1['id'])}">{$vo1.name}</a></li>					</volist>
+					</ul>
+				</div>
+				<div class="local fright">
+					<img src="<?php echo __IMG ;?>locol.png" alt="" />
+					| <a href="__MODULE__/Index/index">首页</a> | <a href="__MODULE__/Product/products">产品中心</a> | <a href="">最新产品</a> 
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article">
+					<ul class="pro_img">					<volist name="product" id="vo1">
+						<li style="width:200px,heigth:200px">
+							<div>
+								<div>
+									<img src="{$vo1['img1']}" alt="" style="width:200px;height:200px"/>
+									<div style="width:200px,heigth:200px">
+										<p>{$vo1.data1}<br />{$vo1.sort} <br />{$vo1.name}</p><span></span>
+										<a href="{:U('Product/products_center?ids='.$vo1['id'].'&id='.$id)}" class="first">查看详情</a>
+										<a href="{:U('Product/products_center?ids='.$vo1['id'].'&id='.$id)}" class="last">加购物车</a>
+									</div>
+								</div>
+							</div>
+						</li>					</volist>
+					</ul>
+					<div class="page row">
+						<div class=" col-md-3 col-sm-2"></div>
+						<div class=" col-md-6 col-sm-8">
+							<a href="{:U('Product/products?page='.$pageup.'&'.$param)}">上一页</a>							<for start="1" end="$totalpage">								<if condition="$page eq $i">									<a id="page_now">{$i}</a>								<else />									<a href="{:U('Product/products?page='.$i.'&'.$param)}">{$i}</a>								</if>							</for>
+							
+							<a href="{:U('Product/products?page='.$pagedown.'&'.$param)}">下一页</a>
+						</div>
+						<div class=" col-md-3 col-sm-2"></div>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/>

@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>确认订单</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>vip.css"/>
+
+
+<style type="text/css">
+	
+</style>
+
+</head>
+
+<body>
+<!--***************************头部*********************************--><include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="vip_center">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>会员中心</p>
+					<span>Member Center</span>
+				</div>
+				<div id="vip" class="sub_nav fleft">				
+					<ul>						<li><a href="__MODULE__/User/vip_center/">会员首页</a></li>						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>						<li><a href="__MODULE__/User/my_order">订单中心</a></li>						<li class="last" id="sub_nav_first"><a href="__ACTION__/Product/shopping_cart">购物车</a></li>
+					</ul>
+				</div>
+				<div class="box_logo fright">
+					<img src="<?php echo __IMG?>logo.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article_scro">
+					<div class="article_title">
+						<p>确认订单</p>
+					</div>
+					<div class="inbox" id="box">
+						<div class="confirm overf">					<form action="{:U('Pay/pay')}" method="post" class="form-horizontal">							<input type="hidden" name="path" value="{$path}">							<div class="address overf">							<li>
+								<span class="fleft">收货地址：</span>
+								<div class="fleft">								<volist name="result" id="val">									
+									<div class="overf">
+										<p><span>默认地址</span></p>
+										<label class="check">
+											<input type="radio" name="address" <if condition="$val['address_default'] eq 1">checked </if> value={$val.id} />
+											<span>{$val.province} {$val.city} {$val.city2} {$val.street} （{$val.name} 收）{$val.tel} </span>											
+										</label>
+									</div>								</volist>
+									<a href="{:U('User/add_address')}" class="add_new">添加新地址</a>
+									<span>（最多可保存6个）</span>
+								</div>
+							</div>
+							
+							<div class="row first">
+								<div class="col-sm-2"></div>
+								<div class="col-md-5 col-sm-4">商品信息</div>
+								<div class="col-sm-1">单价</div>
+								<div class="col-md-1 col-sm-2">数量</div>
+								<div class="col-sm-1">优惠</div>
+								<div class="col-sm-1">小计</div>
+								<div class="col-sm-1"></div>
+							</div>						<!-- 立即购买 -->					<if condition="$id!=0">												<div class="row">								<input type="hidden" name="cart_id[]" value="">								<div class="col-sm-2"><img src="{$res1.img1}" style="width:200px;height:200px"/></div>								<div class="col-md-5 col-sm-4 intordu">									<p>jimson collection {$cate_name}{$res1.name}</p>									<p class="last">尺码：{$data['size']} <br />颜色：{$data['image']}</p>								</div>								<div class="col-sm-1"><h6>原价：</h6>￥{$res1.pro_price}元</div>								<div class="cart_num col-md-1 col-sm-2">									<span class="num">{$data['num']}</span>								</div>								<div class="col-sm-1"><h6>优惠：</h6>{$res1['pro_off']*10}折优惠</div>								<div class="col-sm-1 money"><h6>现价：</h6><span class="now_price">￥{$res1['pro_price']*$data['num']*$res1['pro_off']}元</span></div>																		<input type="hidden" value="{$res1['pro_price']*$data['num']*$res1['pro_off']}" name="price[]">								<div class="col-sm-1"></div>							</div>										<else />						<!-- 购物车 -->						<foreach name="res" item="va">
+							<div class="row">								<input type="hidden" name="cart_id[]" value="{$va.id}">
+								<div class="col-sm-2"><img src="{$va.img1}" style="width:200px;height:200px"/></div>
+								<div class="col-md-5 col-sm-4 intordu">
+									<p>jimson collection {$va.cate_name}{$va.name}</p>
+									<p class="last">尺码：{$va.size} <br />颜色：{$va.img}</p>
+								</div>
+								<div class="col-sm-1"><h6>原价：</h6>￥{$va.pro_price}元</div>
+								<div class="cart_num col-md-1 col-sm-2">
+									<span class="num">{$va.num}</span>
+								</div>
+								<div class="col-sm-1"><h6>优惠：</h6>{$va['pro_off']*10}折优惠</div>
+								<div class="col-sm-1 money"><h6>现价：</h6><span class="now_price">￥{$va['pro_price']*$va['num']*$va['pro_off']}元</span></div>																		<input type="hidden" value="{$va['pro_price']*$va['num']*$va['pro_off']}" name="price[]">
+								<div class="col-sm-1"></div>
+							</div>						</foreach>
+					</if>
+								<div class="fleft">
+									<p>
+										<span>给JC留言： </span>
+										<textarea name="other" class="form-control"></textarea>								<if condition="$id!=0">
+									</p><span>运送费用：￥{$res1.sendprice}元</span></p>								<else />									</p><span>运送费用：￥{$va.sendprice}元</span></p>								</if>
+								</div>
+								<div class="fright">
+									<input type="submit" value="确认订单并付款"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/>
+<script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script>
+<script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script><script></script>
+</html>

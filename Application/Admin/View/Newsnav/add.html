@@ -1,0 +1,58 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>新闻管理中心</title>
+</head>
+<body scroll="no">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b">
+			<div class="subnav"><h1 class="title_2 line_x">添加新闻类型</h1></div>
+			<form id="form" action="{:U('Newsnav/add')}" method="post" onsubmit="check()">
+				<div class="pad_lr_10">
+					<div class="col_tab">
+						<div class="J_panes">
+							<div class="content_list pad_10" style="display: block;">
+								<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+									<tbody>
+										<tr>
+											<th>新闻分类名称 :</th>
+											<td>
+												<input type="text" name="name" id="J_title" placeholder="请填写新闻类型" class="input-text" size="30">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="mt10">
+							<input type="button" id="btn" value="提&nbsp;&nbsp;交" class="btn btn_submit">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+$('#btn').click(function(){
+		var title=$('input[name="name"]').val();
+		if($.trim(title)==''){
+			alert ("请输入新闻类型");
+			return false;
+		}
+		$.post('{:U("Newsnav/add")}',{name:title},function(data){
+			if(data==-1){
+				alert ("该新闻类型已存在！！");
+			}else if(data==0){
+				alert("添加成功");
+				location.assign("{:U('Newsnav/index')}");
+			}else if(data==1){
+				alert ("添加失败");
+				location.reload();
+			}
+		},'json')
+})
+</script>
+</body>
+</html>

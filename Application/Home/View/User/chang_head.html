@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+<title>修改头像</title>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>bootstrap.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>base.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>public.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>vip.css"/>
+
+
+
+
+
+<style type="text/css">
+
+	
+
+</style>
+		<link rel="stylesheet" href="__COMMON__kindeditor/themes/default/default.css" />
+		<script src="__COMMON__kindeditor/kindeditor.js"></script>
+		<script src="__COMMON__kindeditor/lang/zh_CN.js"></script>
+		<script charset="utf-8" src="__COMMON__kindeditor/kindeditor-min.js"></script>
+		<!--
+		必须引入jquery,后面的循环和赋值需要用到
+		1.循环上传按钮、
+		2.每个上传按钮的点击事件
+		建议点击按钮的class有upload_img
+		注意：点击按钮之前要用一个input来存放文件的路径
+			input之前需要一个img来显示图片
+		-->
+		<script src="__COMMON__jquery.js"></script>
+		<script>
+			KindEditor.ready(function(K) {
+				var editor = K.editor({
+					allowFileManager : true
+				});
+				$(".upload_img").each(function(k,v){ //循环上传按钮、
+					$(v).click(function(){ //每个上传按钮的点击事件
+						editor.loadPlugin('image', function() {
+							editor.plugin.imageDialog({
+								imageUrl:$(v).prev().val(),
+								clickFn : function(url, title, width, height, border, align) {
+									$(v).prev().val(url); //为他之前的input赋值
+									$(v).prev().prev().attr("src",url); //为他之前的之前的img赋值
+									editor.hideDialog();
+								}
+							});
+						});
+					});
+				})
+			});
+		</script>
+
+</head>
+
+
+
+<body>
+<include file="Public/head" />
+
+	<!--***************************内容*********************************-->
+
+	<div class="content cent">
+
+		<div class="vip_center">
+
+			<div class="title overf">
+
+				<div class="title_head fleft">
+
+					<p>会员中心</p>
+
+					<span>Member Center</span>
+
+				</div>
+
+				<div id="vip" class="sub_nav fleft">
+
+					<ul>
+
+						<li><a href="__MODULE__/User/vip_center/">会员首页</a></li>
+
+						<li id="sub_nav_first"><a href="__ACTION__/User/vip_information">个人资料</a></li>
+
+						<li><a href="__MODULE__/User/my_order">订单中心</a></li>
+
+						<li class="last"><a href="__MODULE__/Product/shopping_cart">购物车</a></li>
+
+					</ul>
+
+				</div>
+
+				<div class="box_logo fright">
+
+					<img src="<?php echo __IMG?>logo.png"/>
+
+				</div>
+
+			</div>
+
+			<div class="box_blur blur"></div>
+
+			<div class="box">
+
+				<div class="article">
+
+					<div class="article_title">
+
+						<p>修改头像</p>
+
+					</div>
+						
+					<div class="inbox">
+
+					<form class="change_password form-horizontal overf" action="{:U('User/chang_head')}" method="post">
+
+							<div class="overf">
+
+								<span>个人头像：</span>
+								<volist name="res" id="va">
+								<p>
+									<img src="{$va.headimg}" style="max-width:100px;">
+									<input type="hidden" name="img" value="{$va.headimg}" /> 
+									<input type="button" class="upload_img" value="选择图片" />
+								</p>
+								</volist>
+							
+						
+
+					</div>
+					<input type="submit" class="submit" value="提交" id="btn"/>
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--***************************底部*********************************-->
+<include file="Public/foot"/>

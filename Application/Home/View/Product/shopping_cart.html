@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>购物车</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>vip.css"/>
+
+</head>
+<body>
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="vip_center">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>会员中心</p>
+					<span>Member Center</span>
+				</div>
+				<div id="vip" class="sub_nav fleft">
+					<ul class="overf">
+						<li><a href="__MODULE__/User/vip_center/">会员首页</a></li>						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>						<li><a href="__MODULE__/User/my_order">订单中心</a></li>						<li class="last" id="sub_nav_first"><a href="__ACTION__/User/shopping_cart">购物车</a></li>
+					</ul>
+				</div>
+				<div class="box_logo fright">
+					<img src="<?php echo __IMG ;?>logo.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article_scro" style="width:1200px;height:700px">
+					<div class="article_title">
+						<p>购物车</p>
+					</div>
+					<div class="inbox" id="box">
+				<form class="shopping_cart form-horizontal">
+							<div class="row first">
+								<div class="col-md-2 col-xs-3">									
+								</div>
+								<div class="col-md-5 col-xs-3">商品信息</div>
+								<div class="col-xs-1 pad0">单价</div>
+								<div class="col-md-1 col-xs-2 pad0">数量</div>
+								<div class="col-xs-1 pad0">优惠</div>
+								<div class="col-xs-1 pad0">小计</div>
+								<div class="col-xs-1 pad0"></div>
+							</div>						<volist name="result" id="vo">						
+							<div class="row pro" id="list">								<li>
+								<div class="col-md-2 col-sm-3 col-xs-6 img">									<label class="checkbox">										<input type="checkbox" name="checked[]" id="a{$vo.id}" onclick="change({$vo.id})" value="{$vo.id}"/>									</label>									<a href=""><img src="{$vo.img1}" style="width:100px;height:100px"/></a>								</div>
+								<div class="col-md-5 col-sm-3 col-xs-6 intordu">
+									<a href=""><p>jimson collection {$vo.cate_name}&nbsp;{$vo.name}</p></a>
+									<p class="last">尺码：{$vo.size} <br />颜色：{$vo.img}</p>
+								</div>
+								<div class="col-sm-1 old"><h6>原价：</h6>￥<span id="price{$vo.id}">{$vo.pro_price}</span></div>
+								<div class="col-md-1 col-sm-2 cart_num">
+									<span id="add{$vo.id}" onclick="add({$vo.id})">+</span>
+									<span class="num" id="num{$vo.id}">{$vo.num}</span>
+									<span id="cut{$vo.id}" onclick="cut({$vo.id})">-</span>
+								</div>								<input type="hidden" name="num" value="">								<input type="hidden" name="cartid{$vo.id}" id="cartid{$vo.id}" value="{$vo.id}">
+								<div class="col-sm-1 percent"><h6>优惠：</h6>{$vo['pro_off']*10}折</div>
+								<div class="col-sm-1 money"><h6>小计：</h6>￥<span value="{$vo.id}" id="now_price{$vo.id}" class="now_price">{$vo['pro_price']*$vo['num']}</span></div>
+								<div class="col-sm-1 settlement"><a href="javascript:del({$vo['id']})">删除</a></div>														</li>
+						</div>					</volist>
+							<div class="all overf" >
+								
+								
+							</div>							<input type="hidden" value="" id="now_price" name="now_price"/>
+							<a href="javascript:onclick()">提交订单</a>							
+				</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/><script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script><script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script>
+<script>// 点击单选和全选时的价格//商品小计/* var nowprice = '';	$('#list li').each(function(k,v){		var num=$(v).find('#num').text();		var price=$(v).find('#price').text();		$(v).find("#add").click(function(){			num++;		})		var nowprice = price*num;	    $(v).find('.now_price').text(nowprice);	} *///商品总价var  total;var f='';//单选的情况function add(id){	var num = $("#num"+id).text();	$("#add"+id).click(function(){		num++;		var p=($('#price'+id).text())*num;		$('#now_price'+id).text(p);		$("#num"+id).text(num);		$("input[name='num']").attr('value',num);	})}function cut(id){	var num = $("#num"+id).text();	$("#cut"+id).click(function(){		num--;		if(num<1){num=1;}		var p=($('#price'+id).text())*num;		$('#now_price'+id).text(p);		$("#num"+id).text(num);		$("input[name='num']").attr('value',num);	})}function change(id){		var cartid=$('#cartid'+id).val();		var num2=$('#num'+id).text();		 if($('#a'+id).prop('checked')==true){			$('#a'+id).attr('value',3);			var status=$('#a'+id).val();			$.post("{:U('Product/change')}",{cartid:cartid,num:num2,status:status},function(date){				if(date==-1){					alert('非法请求');				}else if(date==1){					alert('选取商品成功');				}			},'json');		}else{			$('#a'+id).attr('value',1);			var status=$('#a'+id).val();		 	$.post("{:U('Order/change')}",{cartid:cartid,num:num2,status:status},function(date){				if(date==-1){					alert('非法请求');				}else if(date==1){					alert('取消选中商品成功');				}			},'json');  					}}		function onclick(){	var check=$('input[type="checkbox"]');	if(check.attr('checked')!='checked'){		alert("至少选择一件商品，才能提交订单");		return false;	}	location.assign("{:U('Product/order_confirm')}");}function del(id){		if(confirm("确定要删除该订单吗？？")){			$.post('{:U("Product/del")}',{id:id},function(data){				if(data==-1){					alert('请求失败！！请刷新后再次尝试');					return false;				}else if(data==0){					alert('删除成功');					location.reload();				}else if(data==1){					alert('删除失败');				}			},'json')		}	}</script>

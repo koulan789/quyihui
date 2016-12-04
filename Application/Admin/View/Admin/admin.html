@@ -1,0 +1,61 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>管理员中心</title>
+</head>
+<body scroll="no" style="overflow: hidden;">
+<div id="content">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b" style="height: 297px;">
+			<div class="subnav">
+				<div class="content_menu ib_a blue line_x"><a class="add fb J_showdialog" href="{:U('Admin/add')}"><em>添加管理员</em></a></div>
+			</div>
+			<div class="pad_lr_10">
+				<div class="J_tablelist table_list">
+					<table width="100%" cellspacing="0" border=1>
+						<thead>
+							<tr>
+								<th align="center" width="20%">管理员名称</th>
+								<th align="center" width="20%">管理员所属角色名称</th>
+								<th width="20%">管理员操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="admin" id="vo">
+							<tr>
+								<td align="center">{$vo.name}</td>
+								<td align="center">{$vo.p_name}</td>
+								<td align="center">
+								<a class="J_showdialog" href="{:U('Admin/edit',array('id'=>$vo['id']))}">编辑</a> |<a href="javascript:del({$vo.id})">删除</a></td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+function del(id){
+	if(confirm("你确定删除该管理员吗？")){
+		$.post("{:U('Admin/del')}",{id:id},function(data){
+			if(data == 1){
+				alert("删除成功!!");
+				location.reload();
+				}
+			else if(data ==0){
+				alert("删除失败!!");
+				location.reload();
+			}else if(data ==2){
+				alert("请求操作失败，请刷新重试");
+			}
+				
+		},'json')
+	}
+}
+</script>
+</body>
+</html>

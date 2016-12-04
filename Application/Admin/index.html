@@ -1,0 +1,81 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<title>管理中心</title>
+</head>
+<body scroll="no" style="overflow: hidden;">
+<div id="header">
+	<div class="logo"><a href="#" title="管理中心"></a></div>
+	<div class="fr">
+		<div class="cut_line admin_info tr">
+			<a href="./" target="_blank">网站首页</a>
+			<span class="cut">|</span>1：<span class="mr10">admin</span>
+			<a href="">[注销]</a>
+		</div>
+	</div>
+</div>
+<div id="content">
+	<div class="left_menu fl">
+		<div id="J_lmenu" class="J_lmenu" data-uri="/index.php?g=admin&amp;m=index&amp;a=left">
+			<h3 class="f14"><span class="J_switchs cu on" title="展开或关闭"></span>商品管理</h3>
+			<ul>
+				<li class="sub_menu"><a>后台首页</a></li>
+				<li class="sub_menu"><a>商品管理</a></li>
+				<li class="sub_menu"><a>商品分类</a></li>
+				<li class="sub_menu on fb blue"><a>添加商品</a></li>
+				<li class="sub_menu"><a>品牌管理</a></li>
+				<li class="sub_menu"><a>属性管理</a></li>
+				<li class="sub_menu"><a>首页背景大图</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b" style="height: 297px;">
+			<div class="subnav">
+				<div class="content_menu ib_a blue line_x"><a class="add fb J_showdialog"><em>添加属性</em></a></div>
+			</div>
+			<div class="pad_lr_10">
+				<div class="J_tablelist table_list">
+					<table width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th width="5%"><input type="checkbox" id="checkall_t" class="J_checkall"></th>
+								<th width="5%"><span tdtype="order_by" fieldname="id">ID</span></th>
+								<th align="center" width="20%">属性标题</th>
+								<th align="center" width="20%">颜色属性</th>
+								<th align="center" width="20%">尺寸属性</th>
+								<th width="20%">管理操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td align="center"><input type="checkbox" class="J_checkitem" value="122"></td>
+								<td align="center">122</td>
+								<td align="center">包包的属性</td>
+								<td align="center">123</td>
+								<td align="center">213</td>
+								<td align="center">
+									<a class="J_showdialog">编辑</a> |<a>删除</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="js/jquery.js"></script>
+<script>
+$(".J_switchs").click(function(){
+	if($(this).hasClass("on")){
+		$(this).removeClass("on");
+		$(this).parent().next().css("display","none");
+	}else{
+		$(this).addClass("on");
+		$(this).parent().next().css("display","block");
+	}
+})
+</script>
+</body>
+</html> 

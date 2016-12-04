@@ -1,0 +1,103 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>添加管理员</title>
+</head>
+<body scroll="no">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b">
+			<div class="subnav"><h1 class="title_2 line_x">添加管理员</h1></div>
+			<form id="info_form"  method="post" onsubmit="check()">
+				<div class="pad_lr_10">
+					<div class="col_tab">
+						<div class="J_panes">
+							<div class="content_list pad_10" style="display: block;">
+								<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+									<tbody>
+										<tr>
+											<th>管理员角色类型 :</th>
+											<td>
+												<select id="select" class="J_cate_select mr10" name="p_id">
+													<option value="0" >--请选择角色类型--</option>
+													<volist name="data" id="val">
+													<option value="{$val.id}" >--{$val.name}--</option>
+													</volist>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>管理员名称 :</th>
+											<td>
+												<input type="text" name="name" id="J_title" placeholder="请填写管理员名称" class="input-text" size="30">
+											</td>
+										</tr>
+										<tr>
+											<th>管理员密码 :</th>
+											<td>
+												<input type="text" name="pass" id="pass1" placeholder="请填写管理员密码" class="input-text" size="30">
+											</td>
+										</tr>
+										<tr>
+											<th>请再次输入管理员密码 :</th>
+											<td>
+												<input type="text"  id="pass2"  class="input-text" size="30">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="mt10">
+							<input type="button" id="btn" value="提&nbsp;&nbsp;交" class="btn btn_submit">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+$('#btn').click(function(){
+	var name=$('input[name="name"]').val();
+	var pass1=$('#pass1').val();
+	var pass2=$('#pass2').val();
+	var id=$('#select').val();
+	if(id=='0'){
+		alert('请选择管理员的角色类型');
+		return false;
+	}else if($.trim(name)==''){
+		alert('请填写管理员名称');
+		return false;
+	}else if($.trim(pass1)==''){
+		alert('请填写管理员密码');
+		return false;
+	}if($.trim(pass2)==''){
+		alert('请填写管理员密码');
+		return false;
+	}
+	if($.trim(pass1) != $.trim(pass2)){
+		alert("两次输入的密码不一致");
+		return false;
+	}
+	$.post("{:U('Admin/add')}",{name:name,pass:pass1,id:id},function(data){
+		if(data.msg == 1){
+			alert("添加成功");
+			window.location.href="Admin/admin";
+		}else if(data.msg == 0){
+			alert("添加失败");
+			location.reload();
+		}
+		else if(data.msg == 2){
+			alert("该角色存在!!请重新添加");
+			location.reload();
+		}
+	},'json'); 
+})
+	
+	
+	
+
+</script>
+</body>
+</html>

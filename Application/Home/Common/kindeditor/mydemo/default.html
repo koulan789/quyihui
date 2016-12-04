@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>文本域</title>
+		<link rel="stylesheet" href="../themes/default/default.css" />
+		<script charset="utf-8" src="../kindeditor-min.js"></script>
+		<script charset="utf-8" src="../lang/zh_CN.js"></script>
+		<!--
+		这里不需要引入jquery
+		注意：textarea的name必须和js里面的K.create('textarea[name="content"]',这个相等
+		-->
+		<script>
+			var editor;
+			KindEditor.ready(function(K) {
+				editor = K.create('textarea[name="content"]', {
+					allowFileManager : true
+				});
+				editor = K.create('textarea[name="content123"]', {
+					allowFileManager : true
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h3>默认模式</h3>
+		<form action="" method="post">
+			<textarea name="content" style="width:800px;height:400px;visibility:hidden;"></textarea>
+			<textarea name="content123" style="width:800px;height:400px;visibility:hidden;"></textarea>
+			<input type="submit" name="123" value="123123">
+		</form>
+	</body>
+</html>

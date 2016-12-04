@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>文件上传的例子</title>
+		<link rel="stylesheet" href="../themes/default/default.css" />
+		<script src="../kindeditor.js"></script>
+		<script src="../lang/zh_CN.js"></script>
+		<!--
+		这里需要引入jquery
+		1.循环上传按钮
+		2.为上传按钮赋予点击事件
+		建议点击按钮的class有insertfile
+		注意：点击按钮要用一个input来存放文件的路径
+		-->
+		<script src="../jquery.js"></script>
+		<script>
+			KindEditor.ready(function(K) {
+				var editor = K.editor({
+					allowFileManager : true
+				});
+				$(".insertfile").each(function(k,v){//循环点击按钮
+					$(v).click(function(){//赋予点击事件
+						editor.loadPlugin('insertfile', function() {
+						editor.plugin.fileDialog({
+							fileUrl :$(v).prev().val(),//取得他上一个input元素的值
+							clickFn : function(url, title) {
+								$(v).prev().val(url);//修改他上一个input元素的值
+								editor.hideDialog();
+							}
+						});
+					});
+					})
+				})
+			});
+		</script>
+	</head>
+	<body>
+		<input type="text" readonly class="url" value="" /> <input type="button" class="insertfile" value="选择文件" />
+		<input type="text" class="url" value="" /> <input type="button" class="insertfile" value="选择文件" />
+		<input type="text" class="url" value="" /> <input type="button" class="insertfile" value="选择文件" />
+		<input type="text" class="url" value="" /> <input type="button" class="insertfile" value="选择文件" />
+	</body>
+</html>

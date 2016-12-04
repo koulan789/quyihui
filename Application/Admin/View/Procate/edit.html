@@ -1,0 +1,52 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>产品管理中心</title>
+</head>
+<body scroll="no">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b">
+			<div class="subnav"><h1 class="title_2 line_x">修改产品类型</h1></div>
+			<form id="info_form" action="{:U('Procate/edit')}" method="post">
+				<div class="pad_lr_10">
+				<input type="hidden" name="id" value="{$data['id']}">
+					<div class="col_tab">
+						<div class="J_panes">
+							<div class="content_list pad_10" style="display: block;">
+								<table width="100%" cellpadding="2" cellspacing="1" class="table_form">
+									<tbody>
+										<tr>
+											<th width="120">产品所属分类 :</th>
+											<td>
+												<select class="J_cate_select mr10" name="p_id">
+													<option value="0" >--请选择（默认为一级分类）--</option>
+													<foreach name="cate" item="vo">
+														<option value="{$vo.id}" <if condition="$data['p_id'] eq $vo['id']">selected</if>>--{$vo.name}--</option>
+													</foreach>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<th>分类名称 :</th>
+											<td>
+												<input type="text" name="name" id="J_title" placeholder="请填写分类名称" value="{$data['name']}" class="input-text" size="60">
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="mt10">
+							<input type="submit" value="提&nbsp;&nbsp;交" class="btn btn_submit">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+</script>
+</body>
+</html>

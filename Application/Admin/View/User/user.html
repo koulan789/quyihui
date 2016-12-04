@@ -1,0 +1,60 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>会员中心</title>
+</head>
+<body scroll="no" style="overflow: hidden;">
+<div id="content">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b" style="height: 800px;">
+			<div class="subnav">
+				
+			</div>
+			<div class="pad_lr_10">
+				<div class="J_tablelist table_list">
+					<table width="100%" cellspacing="0" border=1>
+						<thead>
+							<tr>
+								<th align="center" width="20%">会员编号</th>
+								<th align="center" width="20%">会员名称</th>
+								<th align="center" width="20%">会员邮箱</th>
+								<th width="20%">会员操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="res" id="vo">
+							<tr>
+								<td align="center">{$vo.id}</td>
+								<td align="center">{$vo.name}</td>
+								<td align="center">{$vo.email}</td>
+								<td align="center">
+								<a href="javascript:del({$vo.id})">删除</a></td>
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+function del(id){
+	if(confirm("你确定删除该会员吗？")){
+		$.post("{:U('User/del')}",{id:id},function(data){
+			if(data == 1){
+				alert("删除成功!!");
+				location.reload();
+				}
+			else if(data ==-1){
+				alert("删除失败!!");
+				location.reload();
+			}
+		},'json')
+	}
+}
+</script>
+</body>
+</html>

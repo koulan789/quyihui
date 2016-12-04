@@ -1,0 +1,42 @@
+﻿/*标签样式初始化*/
+
+*{ margin: 0; padding: 0; list-style: none;}
+body{ width: 100%;color: #fff; }
+body,button,input,select,textarea{font:12px "宋体";overflow-x:hidden; }
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight: normal; font-style: normal;}
+a{text-decoration: none;outline: none;color: #fff;}
+a:active{star:expression(this.onFoucs=this.blur());}/*禁止链接出现虚线框*/
+a:hover{ color: #b8e40b;text-decoration: none; }
+img{ display: inline-block; border: none;}
+p,span,a,li,dd,button,input,select,textarea{ font-style: normal; font: 12px "宋体";}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+table{border-collapse:collapse;border-spacing:0;}
+
+.overf{ overflow:hidden; }
+.clear{clear: both;}
+.fleft{ float:left;}
+.fright{ float:right;}
+.bor_none{border: none !important;}
+
+
+/*表单样式*/
+.form-control,select{height: 30px;width: 100px;font: 14px "宋体"; border: 1px solid #000;color: #fff;border-radius: 0;float: left;background: rgba(0,0,0,0.2);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);}
+textarea{resize: none;}
+input[type="radio"]{background: #B8E40B;}
+
+.row{margin: 0;text-align: center;padding-top: 26px;color: #fff;}
+.row>div{padding: 0;}
+
+@media (max-width: 767px) {
+	.cent {margin: 0 auto;width: 95%;}
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	.cent {margin: 0 auto;width: 95%;}
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+	.cent {margin: 0 auto;width: 980px;}
+}
+@media (min-width: 1201px) {
+	.cent {margin: 0 auto;width: 1200px;}
+}

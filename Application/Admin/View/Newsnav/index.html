@@ -1,0 +1,64 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>新闻中心</title>
+</head>
+<body scroll="no" style="overflow: hidden;">
+<div id="content">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b" style="height: 1000px;">
+			<div class="subnav">
+				<div class="content_menu ib_a blue line_x"><a class="add fb J_showdialog" href="{:U('Newsnav/add')}"><em>添加新闻分类</em></a></div>
+			</div>
+		<form action="{:U('Ncate/edit')}" method="post">
+			<div class="pad_lr_10">
+				<div class="J_tablelist table_list">
+					<table width="100%" cellspacing="0" border=1>
+						<thead>
+							<tr>
+								<th align="center"><span tdtype="order_by" fieldname="id">ID</span></th>
+								<th align="center">新闻类型</th>
+								<th align="center">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="nav" id="val">
+							<tr>
+								<td align="center">{$val.id}</span></td>
+								<td align="center">{$val.name}</td>
+								<td width="10%" align="center"><a class="J_showdialog" href="{:U('Newsnav/edit',array('id'=>$val['id']))}" >编辑</a> |<a href="javascript:del({$val.id})">删除</a></td>	
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+	function del(id){
+		if(confirm("你确定要删除该条新闻类型吗？？")){
+			$.post('{:U("Newsnav/del")}',{id:id},function(data){
+				if(data==-1){
+					alert ("非法请求！该类型下有新闻不能删除！");
+					location.reload();
+				}else if(data==1){
+					alert ("删除失败");
+					location.reload();
+				}else if(data==0){
+					alert ("删除成功");
+					location.reload();
+				}else if(data==2){
+					alert ("数据请求失败，请刷新重试");
+					location.reload();
+				}
+			},'json')
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>订单详情</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>vip.css"/>
+
+
+<style type="text/css">
+	
+</style>
+
+</head>
+
+<body>
+<!--***************************头部*********************************-->
+	<div class="header">
+		<div class="head_top">
+			<div class="cent">
+				<div class="login">
+					<a href="__MODULE__/User/userlogin">登录 </a>|&nbsp;<a href="__MODULE__/User/register">注册 </a>|&nbsp;<a href="__MODULE__/User/vip_center">会员中心</a>
+				</div>			
+			</div>
+		</div>
+		<div class="head_bottom">
+			<div class="cent overf">
+				<div class="logo fleft">
+					<a href="__MODULE__/Index/index"><img src="<?php echo __IMG ;?>logo.png" alt="logo" /></a>
+				</div>
+				<div class="nav_box fright">
+					<div class="phone_menu">
+						<button type="button" class="phone_nav">
+				        	<span></span>
+				        	<span></span>
+				        	<span></span>
+				    	</button>
+					</div>
+					<div class="nav">
+						<ul class="overf">
+							<li><a href="__MODULE__/Index/index.html">首页</a><span></span></li>							<li><a href="__MODULE__/Introduce/introduce.html">品牌介绍</a><span></span></li>							<li><a href="__MODULE__/News/news.html">新闻中心</a><span></span></li>							<li><a href="__ACTION__/Product/products.html">产品中心</a><span></span></li>							<li><a href="__MODULE__/Contactus/contact_us">联系我们</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="vip_center">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>会员中心</p>
+					<span>Member Center</span>
+				</div>
+				<div id="vip" class="sub_nav fleft">
+					<ul>
+						<li><a href="__MODULE__/User/vip_center">会员首页</a></li>
+						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>
+						<li id="sub_nav_first"><a href="__MODULE__/User/my_order">订单中心</a></li>
+						<li class="last"><a href="__MODULE__/User/shopping_cart">购物车</a></li>
+					</ul>
+				</div>
+				<div class="box_logo fright">
+					<img src="<?php echo __IMG ;?>logo.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article_scro">
+					<div class="article_title">
+						<p>订单详情</p>
+					</div>
+					<div class="inbox" id="box">
+						<div class="order_careless">
+							<div>
+								<img src="<?php echo __IMG ;?>locol.png" class="fleft"/>
+								<h2>收货地址：</h2>
+								<p>四川省 成都市 锦江区 东门正街38-4恒泰大厦银座95号 （李先生 收）15108373172</p>
+								<h3>买家留言：</h3>
+							</div>
+							<div class="order_infor">
+								<div class="row">
+									<div class="col-sm-5">商品信息</div>
+									<div class="col-sm-1">单价</div>
+									<div class="col-sm-1">数量</div>
+									<div class="col-sm-1">状态</div>
+									<div class="col-sm-1">优惠</div>
+									<div class="col-sm-2">商品总价</div>
+									<div class="col-sm-1"></div>
+								</div>
+								<div class="row second">
+									<div class="col-sm-5 overf">
+										<a href="products-center.html"><img src="<?php echo __IMG ;?>pro-img6.png" class="fleft"></a>
+										<p class="fleft intordu">
+											<a href="products-center.html"><span>jimson collection 2016春夏新款碎花丝绸纽扣连衣裙</span></a><br />
+											<span class="last">尺码：M    (165 98A) <br />颜色：黑色</span>
+										</p>
+									</div>
+									<div class="col-sm-1 tab tonone"><h6>原价：</h6>￥488</div>
+									<div class="col-sm-1 tonone"><h6>数量：</h6>1</div>
+									<div class="col-sm-1 tonone"><h6>订单状态：</h6>已发货</div>
+									<div class="col-sm-1 tonone"><h6>优惠情况：</h6>8折优惠</div>
+									<div class="col-sm-2"><h6>现价：</h6>￥390.4 <br />（快递：0.00）</div>
+									<div class="col-sm-1 tonone">
+										<a class="more">退款</a>
+									</div>
+								</div>
+							</div>
+							<div class="order_num overf">
+								<ul class="overf">
+									<li><span>订单编A号：</span>2840040648822256</li>
+									<li><span>创建时间：</span>2016-4-25 10:50:12<br /><span>付款时间：</span>2016-4-25 10:51:50</li>
+									<li><span>支付宝交易号：</span>201604263211152274963325288</li>
+								</ul>
+							</div>
+							<div class="logistics overf">
+								<span class="fleft">物流信息：</span>
+								<div class="fleft">
+									<p>发货方式：快递 <br />物流公司：中通快递 <br />运单号码：400614622548</p>
+									<p>2016-04-25 14:03:23 您的订单开始处理 <br />
+										2016-04-26 14:14:14 您的订单待配货 <br />
+										2016-04-26 14:18:29 您的包裹已出库
+									</p>
+								</div>
+								<p class="fright">订单总金额：<span>390.4</span>元</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--***************************底部*********************************-->
+	<div class="footer">
+		<span>CopyRight © 2003-2016 &nbsp;&nbsp;Jimson&nbsp;&nbsp;collection服装有限公司&nbsp;&nbsp;版权所有</span>
+	</div>
+</body>
+<script src="<?php echo __JS ;?>jquery.js" type="text/javascript" ></script>
+<script src="<?php echo __JS ;?>bootstrap.min.js" type="text/javascript" ></script>
+<!--[if lte IE 8]>
+	<script src="<?php echo __JS ;?>respond.js"></script>
+	<script src="<?php echo __JS ;?>html5shiv.min.js"></script>
+<![endif]-->
+<script src="<?php echo __JS ;?>swiper.jquery.js" type="text/javascript" ></script>
+<script src="<?php echo __JS ;?>show.js" type="text/javascript" ></script>
+<script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script>
+<script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script>
+</html>

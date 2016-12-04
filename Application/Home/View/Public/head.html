@@ -1,0 +1,60 @@
+
+<!--***************************头部*********************************-->
+	<div class="header">
+
+		<div class="head_top">
+
+			<div class="cent">
+
+				<div class="login">
+					<if condition="session('?user1')"><a href="__MODULE__/User/vip_center">{$user}</a>|<else/><a href="__MODULE__/User/userlogin">登录|</a></if>&nbsp;<if condition="session('?user1')"><a href="__MODULE__/User/a?id=2">注销</a><else/><a href="__MODULE__/User/register">注册</if></a>&nbsp;<a  href="__MODULE__/User/vip_center"><span><if condition="session('?user1')">|会员中心<else/></if></span></a>
+
+				</div>			
+
+			</div>
+
+		</div>
+
+		<div class="head_bottom">
+
+			<div class="cent overf">
+
+				<div class="logo fleft">
+
+					<a href="__MODULE__/Index/index"><img src="<?php echo __IMG;?>logo.png" alt="logo" /></a>
+
+				</div>
+
+				<div class="nav_box fright">
+
+					<div class="phone_menu">
+
+						<button type="button" class="phone_nav">
+
+				        	<span></span>
+
+				        	<span></span>
+
+				        	<span></span>
+
+				    	</button>
+
+					</div>
+
+					<div class="nav">
+
+						<ul class="overf">
+						<volist name="nav" id="vo">
+							<li <if condition="$vo.link eq $href">id="nav_first"</if>><a href="__MODULE__{$vo.link}">{$vo.name}</a><span></span></li>
+						</volist>
+						</ul>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>

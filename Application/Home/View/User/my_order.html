@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+<title>订单中心</title>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>bootstrap.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>base.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>public.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>vip.css"/>
+
+
+
+
+
+<style type="text/css">
+
+	
+
+</style>
+
+
+
+</head>
+
+
+
+<body>
+
+<!--***************************头部*********************************-->
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+
+	<div class="content cent">
+
+		<div class="vip_center">
+
+			<div class="title overf">
+
+				<div class="title_head fleft">
+
+					<p>会员中心</p>
+
+					<span>Member Center</span>
+
+				</div>
+
+				<div id="vip" class="sub_nav fleft">
+
+					<ul>
+
+						<li><a href="__MODULE__/User/vip_center/">会员首页</a></li>
+
+						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>
+
+						<li id="sub_nav_first"><a href="__MODULE__/User/my_order">订单中心</a></li>
+
+						<li class="last"><a href="__MODULE__/Product/shopping_cart">购物车</a></li>
+
+					</ul>
+
+				</div>
+
+				<div class="box_logo fright">
+
+					<img src="<?php echo __IMG?>logo.png"/>
+
+				</div>
+
+			</div>
+
+			<div class="box_blur blur"></div>
+
+			<div class="box">
+
+				<div class="article" style="height:700px">
+
+					<div class="inbox">
+
+						<div class="my_order">
+							<volist name="vip" id="v">
+								<img src="{$v.headimg}"/><span>{$v.name}</span>
+							</volist>
+							<div class="keyword">
+
+								<ul class="overf">
+
+									
+								</ul>
+
+							</div>
+
+						<div class="order_infor" >
+
+								<div class="row">
+
+									<div class="col-sm-4">商品信息</div>
+
+									<div class="col-sm-1">单价</div>
+
+									<div class="col-sm-1">数量</div>
+
+									<div class="col-sm-1">小计</div>
+							
+									<div class="col-sm-2">交易时间</div>
+
+									<div class="col-sm-1 pay_s">交易状态</div>
+
+									<div class="col-sm-2 do_s">操作状态</div>
+
+								</div>
+							<volist name="res" id="val">
+							    
+							<div class="row second" style="height:400px">
+								<volist name="val['product']" id="va">
+								<div style="width:1000px; height:120px">
+									<div class="col-sm-4 overf" style="height:120px;width:400px">
+
+										<img src="{$va.img1}" class="fleft" style="width:100px;height:100px"/>
+
+										<p class="fleft intordu">
+
+											<span>jimson collection {$va.cate_name}{$va.name}</span><br />
+											
+											<span class="last">尺码：{$va.size} <br />颜色：{$va.img}</span><br /><br />
+											<span id="order" value="{$val.order_num}">订单编号: {$val.order_num}</span>
+										</p>
+
+									</div>
+									
+									<div class="col-sm-1 tab tonone">￥{$va.pro_price}</div>
+
+									<div class="col-sm-1 tonone">{$va.num}</div>
+
+									<div class="col-sm-1 tab tonone">￥{$va['pro_price']*$va['num']}</div>
+								</div>
+								</volist>
+								
+							</div>
+							
+							</volist>
+								
+						</div>
+						<div style="width:900px;height:100px;margin-top:-350px;margin-left:700px">
+									<div class="col-sm-2 tonone">{$val.order_time}</div>
+									
+									<div class="col-sm-1 wait">待发货</div>
+									
+									<div class="col-sm-2 last tonone" style="margin-left:80px">
+
+										<img src="<?php echo __IMG?>/delece.png"/>
+
+										<a href="javascript:del()">删除</a>
+
+									</div>
+						</div>	
+							<div class="page row" style="margin-top:300px">
+
+								<div class=" col-md-3 col-sm-2"></div>
+
+								<div class=" col-md-6 col-sm-8">
+
+									<a href="{:U('User/my_order?page='.$pageup)}">上一页</a>
+										<for start="1" end="$totalpage">
+											<if condition="$page eq $i">
+												<a id="page_now">{$i}</a>
+										<else />
+												<a href="{:U('User/my_order?page='.$i)}">{$i}</a>
+											</if>
+										</for>
+									<a href="{:U('User/my_order?page='.$pagedown)}">下一页</a>
+
+								</div>
+
+								<div class=" col-md-3 col-sm-2"></div>
+
+							</div>	
+
+							<div class="page2">
+
+				
+
+							</div>	
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--***************************底部*********************************-->
+<include file="Public/foot"/>
+<script>
+	function del(){
+		var id=$('#order').attr('value');
+		if(confirm("你确定删除该条订单吗？？？")){
+			
+			$.post("{:U('User/order_del')}",{id:id},function(data){
+				if(data==1){
+					alert("删除成功！！");
+					location.reload();
+				}else if(data==-1){
+					alert("删除失败!!");
+				}
+			},'json') 
+		}
+		
+	}
+
+
+
+
+</script>

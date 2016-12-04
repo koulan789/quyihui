@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>联系我们</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>content.css"/>
+
+
+<style type="text/css">
+
+</style>
+
+</head>
+
+<body>
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="contact_us">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>联系我们</p>
+					<span>Contact Us</span>
+				</div>
+				<div class="fright">
+					<img src="<?php echo __IMG ;?>logo2.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article">
+					<div class="opinion_title">
+						<p>您的宝贵意见</p>
+						<p>Precious opinion</p>
+					</div>
+					<div class="inbox phone_scro">
+						<div class="opinion fleft">
+							<form action="{:U('Contactus/contact_us')}" method="post" class="form-horizontal" autocomplete="off">
+								<div class="row">
+									<div class="col-sm-2 col-xs-2">昵称：</div>
+									<div class="col-sm-5 col-xs-9"><input type="text" name="name" class="form-control"/></div>
+									<div class="col-sm-5 col-xs-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2 col-xs-2">电话：</div>
+									<div class="col-sm-5 col-xs-9"><input type="text" name="tel" class="form-control"/></div>
+									<div class="col-sm-5 col-xs-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2 col-xs-2">邮箱：</div>
+									<div class="col-sm-5 col-xs-9"><input type="text" name="mail" class="form-control"/></div>
+									<div class="col-sm-5 col-xs-1"></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-2 col-xs-2">留言：</div>
+									<div class="col-sm-10 col-xs-10"><textarea name="message" class="form-control"></textarea></div>
+								</div>
+								<div class="row">
+									<input type="submit" class="submit" value="提交" id="btn"/>
+								</div>
+							</form>
+						</div>
+						<div class="us_information fright">						<volist name="contactus" id="vo1">
+							<p>
+								公司名称：{$vo1.cname}<br />
+								品牌名称：{$vo1.brand}<br />
+								联系电话：<br />
+								全国招商热线：{$vo1.telphone}<br />
+								{$vo1.name1}（{$vo1.phone1}）<br />
+								{$vo1.name2}（{$vo1.phone2}）<br /><br />
+								邮箱：1、{$vo1.mail1} <br />
+								　　　2、{$vo1.mail2} <br /><br />
+								
+								企业微信号：{$vo1.wet}<br />
+								公司网址：{$vo1.net} <br />
+								公司地址：{$vo1.address}
+							</p>						</volist>
+							<img src="<?php echo __IMG ;?>logo.png"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/><script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script><script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script>
+<script> $('#btn').click(function(){	 var name=$('input[name="name"]').val();	 if(name==''){		 alert("请输入姓名");		 return false;	 }	 var tel=$('input[name="tel"]').val();	 var preg=/^1[3|4|5|8]\d{9}$/;	 if(tel==''){		 alert("手机号不能为空");		 return false;	 }else if(!(preg.test(tel))){		 alert("手机号输入的格式不正确");		 return false;	 } 	 var mail=$('input[name="mail"]').val();	 var preg2=/^\w{1,}@(163|qq|gmail|sina|email|yahoo)\.(com|cn)$/;	 if(mail==''){		 alert("请输入邮箱帐号");		 return false;	 }else if(!(preg2.test(mail))){		 alert("请输入正确的邮箱格式，例如:asafdaf@163.com");		 return false;	 } })</script>

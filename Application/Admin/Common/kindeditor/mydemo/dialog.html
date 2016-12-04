@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>弹出窗口</title>
+		<link rel="stylesheet" href="../themes/default/default.css" />
+		<script src="../kindeditor.js"></script>
+		<!--
+			KindEditor.ready(function(K) {});这个必须需要
+		-->
+	</head>
+	<body>
+		<input type="button" id="create1" value="打开弹出框" />
+		<input type="button" onclick="del('你妹的','小静静又迟到了')" value="删除" />
+	</body>
+</html>
+<script>
+	KindEditor.ready(function(K) {});
+	function del(title,content){
+		KindEditor.ready(function(K) {
+			var dialog = K.dialog({
+				width : 500,
+				title : title,
+				body : '<div style="margin:10px;"><strong>'+content+'</strong></div>',
+				closeBtn : {
+					name : '关闭',
+					click : function(e) {
+						dialog.remove();
+					}
+				},
+				yesBtn : {
+					name : '确定',
+					click : function(e) {
+						alert(this.value);
+					}
+				},
+				noBtn : {
+					name : '取消',
+					click : function(e) {
+						dialog.remove();
+					}
+				}
+			});
+		});
+	}
+</script>

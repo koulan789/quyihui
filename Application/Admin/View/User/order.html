@@ -1,0 +1,149 @@
+<html class="off">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="__COMMON__css/style.css">
+<title>产品中心</title>
+ <style>
+        .pager{
+            text-align:center;
+            padding-bottom:10px;
+        }
+        .pager a{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 1px solid blue;
+            line-height: 30px;
+            margin-right: 5px;
+            font-size:16px;
+        }
+        .pager span{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        	background-color:gray;
+        	border: 1px solid ;
+            line-height: 30px;
+            margin-right: 5px;
+            font-size:16px;
+        }
+    </style>
+</head>
+<body scroll="no" style="overflow: hidden;">
+<div id="content">
+	<div class="right_main">
+		<div id="J_rframe" class="rframe_b" style="height: 500px;">
+			<div class="subnav">
+				<div class="content_menu ib_a blue line_x"><a class="add fb J_showdialog" href="javascript:put()"><em>导出选中的订单</em></a></div>
+			</div>
+		<form action="{:U('Product/prodcut')}" method="post">
+			<div class="pad_lr_10">
+				<div class="J_tablelist table_list">
+					<table width="100%" cellspacing="0" border=1>
+						<thead>
+							<tr>
+								<th width="5%"><input type="checkbox" id="checkall" class="J_checkall"></th>
+								<th  width="5%">订单编号</th>
+								<th  width="23%">订单详情(商品图片  类别  名称 尺码  数量  单价)</th>
+								<th  width="5%">订单日期</th>
+								<th  width="10%">订单配送地址</th>
+								<th  width="5%">下单用户名</th>
+								<th  width="5%">订单总金额</th>
+								<th  width="5%">订单状态</th>
+								<th  width="8%">订单备注（留言）</th>
+								<th width="5%">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+						<volist name="res" id="vo">
+							<tr>
+								<th width="5%"><input type="checkbox" name="check[]" id="check" class="J_checkall" value="{$vo.id}"></th>
+								<td  width="5%">{$vo.order_num}</td>
+								<td  width="23%">
+								<foreach name="vo['product']" item="va">
+								<img src="{$va.img1}" style="width:50px;height:50px">
+								{$va.cate_name}/{$va.name}
+								/{$va.size}
+								/{$va.num}
+								/￥{$va.pro_price}
+								</foreach>
+								</td>
+								<td  width="5%">{$vo.order_time}</td>
+								<td  width="10%">{$vo.add_name}/{$vo.tel}/{$vo.province}/{$vo.city}/{$vo.city2}/{$vo.street}</td>
+								<th  width="5%">{$vo.name}</th>
+								<th  width="5%">￥{$vo.totalprice}</th>
+								<td  width="5%">{$vo.status_name}</td>
+								<td  width="8%">{$vo.content}</td>
+								<td width="5%" align="center"><a class="J_showdialog" href="{:U('User/edit',array('id'=>$vo['id']))}" >编辑</a> |<a href="javascript:del({$vo['id']})">删除</a></td>	
+							</tr>
+						</volist>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			</form>
+			<div class="pager">
+				<for start="1" end="$totalpage">
+				<if condition="$page eq $i">
+					<span>{$i}</span>
+				<else />
+					<a href="{:U('User/order',array('page'=>$i))}">{$i}</a>
+				</if>
+				</for>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="__COMMON__js/jquery.js"></script>
+<script>
+$('#checkall').click(function(){
+	if($('#checkall').prop('checked')==true){
+		$('input[name="check[]"]').attr('checked','checked');
+	}else{
+		$('input[name="check[]"]').removeAttr('checked');
+	}
+})
+
+function del(id){
+	if(confirm('你确定要删除该订单的信息吗？')){
+		 $.post("{:U('User/orderdel')}",{id:id},function(data){
+			if(data == 1){
+				alert("删除成功!!");
+				location.reload();
+				}
+			else if(data ==-1){
+				alert("删除失败!!");
+				location.reload();
+			}
+				
+		},'json')
+	}
+}
+function put(){
+	var checked=$('input[name="check[]"]:checked');
+	if(checked.length != 0){  //有选中的值
+		var f='';
+		var str='';
+		checked.each(function(){
+			str+=f+$(this).val();
+			f=',';
+		})
+		window.location.href="{:U('User/put_out')}?id="+str;
+	}else{
+		alert("没有选中导出的订单");
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

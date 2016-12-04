@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>会员中心</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>content.css"/>
+
+
+<style type="text/css">
+	
+</style>
+
+</head>
+
+<body>
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="vip">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>会员中心</p>
+					<span>Member Center</span>
+				</div>
+				<div id="vip" class="sub_nav fleft">
+					<ul>
+						<li id="sub_nav_first"><a href="__ACTION__/User/vip_center/">会员首页</a></li>
+						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>
+						<li><a href="__MODULE__/User/my_order">订单中心</a></li>
+						<li class="last"><a href="__MODULE__/Product/shopping_cart">购物车</a></li>
+					</ul>
+				</div>
+				<div class="box_logo fright">
+					<img src="<?php echo __IMG ;?>logo.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">		<volist name="res" id="val">
+				<div class="article_scro">
+					<div class="user_infor fleft">
+						<div>
+							<img src="{$val.headimg}" style="width:100px;height:100px"/>
+							<p>{$val.name}</p>
+							<ul>
+								<li><img src="<?php echo __IMG ;?>solid-star.png"/></li>
+								<li><img src="<?php echo __IMG ;?>solid-star.png"/></li>
+								<li><img src="<?php echo __IMG ;?>solid-star.png"/></li>
+								<li><img src="<?php echo __IMG ;?>solid-star.png"/></li>
+								<li><img src="<?php echo __IMG ;?>hollow-star.png"/></li>
+							</ul>
+							<div>
+								<br /><br />
+								<p>代付款：<a href="order-careless.html">{$num1}</a></p>
+								<p>代收货：<a href="order-careless.html">{$num2}</a></p><br /><br />								
+								<p>购物车：<a href="shopping-cart.html">{$num3}</a> <span><a href="{:U('Product/shopping_cart')}">（查看）</a></span></p>
+							</div>
+						</div>
+					</div>				</volist>
+					<div class="inbox" id="box">
+						<div class="user_img">
+							<img src="{$val.headimg}"/><span>{$val.name}</span>
+						</div>
+						<div class="buy overf">
+							<p class="fleft">购买记录：</p>						
+							<div class="row fleft">							<volist name="buy" id="va">								
+								<div class="col-md-3 col-sm-4" style="width:200px;hegiht:200px;margin-">
+									<a href="{:U('User/my_order')}"><img src="{$va.img1}" alt="" style="width:180px;height:200px"/></a>
+									<p><a href="{:U('User/my_order')}">{$va.cate_name}&nbsp;{$va.name}</a></p>
+								</div> 															</volist>
+							</div>
+						</div>
+						<div class="guass overf">
+							<p class="fleft">猜你喜欢：</p>
+							<div class="row fleft">							<volist name="like" id="v">
+								<div class="col-md-3 col-sm-4">
+									<a href="products-center.html"><img src="{$v.img1}" alt="" style="width:180px;height:200px"/></a>
+									<p>{$v.cate_name}<br />{$v.name}</p>
+									<a href="{:U('Product/products_center',array('id2'=>$v['id']))}" class="guass_btn">查看详情</a>
+								</div>							</volist>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/><script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script><script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script>

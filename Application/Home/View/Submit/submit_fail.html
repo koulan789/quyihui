@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+
+<title>订单提交成功</title>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>bootstrap.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>base.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>public.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS?>vip.css"/>
+
+
+
+</head>
+
+
+
+<body>
+
+<!--***************************头部*********************************-->
+<include file="Public/head"/>
+
+	<!--***************************内容*********************************-->
+
+	<div class="content cent">
+
+		<div class="vip_center">
+
+			<div class="title overf">
+
+				<div class="title_head fleft">
+
+					<p>会员中心</p>
+
+					<span>Member Center</span>
+
+				</div>
+
+				<div id="vip" class="sub_nav fleft">
+
+					<ul class="overf">
+
+						
+						<li><a href="__MODULE__/User/vip_center/">会员首页</a></li>
+
+						<li><a href="__MODULE__/User/vip_information">个人资料</a></li>
+
+						<li><a href="__MODULE__/User/my_order">订单中心</a></li>
+
+						<li class="last" id="sub_nav_first"><a href="__ACTION__/User/shopping_cart">购物车</a></li>
+
+					</ul>
+
+				</div>
+
+				<div class="box_logo fright">
+
+					<img src="<?php echo __IMG?>logo.png"/>
+
+				</div>
+
+			</div>
+
+			<div class="box_blur blur"></div>
+
+			<div class="box">
+
+				<div class="article_scro">
+
+					<div class="article_title">
+
+						<p>订单中心</p>
+
+					</div>
+
+					<div class="if_success">
+
+						<div class="if_bg">
+
+							<div>
+
+								<img src="<?php echo __IMG?>success.png" class="fleft"/>
+
+								<div class="if_infor fleft">
+
+									<h2>订单支付成功！</h2>
+
+									<a href="{:U('User/my_order')}" class="submit">查看订单详情</a>
+
+									<a href="{:U('User/vip_center')}" class="back">返回会员中心 >></a>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<!--***************************底部*********************************-->
+
+<include file="Public/foot"/>
+
+<script src="<?php echo __JS?>jquery.nicescroll.js" type="text/javascript" ></script>
+
+<script src="<?php echo __JS?>scrollbar.js" type="text/javascript" ></script>
+
+<script src="<?php echo __JS?>shopping-cart.js" type="text/javascript" ></script>
+
+</html>
+

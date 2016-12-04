@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>个人资料</title>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>base.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>public.css"/>
+<link rel="stylesheet" type="text/css" href="<?php echo __CSS ;?>vip.css"/>
+</head>
+
+<body>
+<include file="Public/head"/>
+	<!--***************************内容*********************************-->
+	<div class="content cent">
+		<div class="vip_center">
+			<div class="title overf">
+				<div class="title_head fleft">
+					<p>会员中心</p>
+					<span>Member Center</span>
+				</div>
+				<div id="vip" class="sub_nav fleft">
+					<ul>					    <li><a href="__MODULE__/User/vip_center/">会员首页</a></li>						<li id="sub_nav_first"><a href="__ACTION__/User/vip_information">个人资料</a></li>						<li><a href="__MODULE__/User/my_order">订单中心</a></li>						<li class="last"><a href="__MODULE__/Product/shopping_cart">购物车</a></li>
+					</ul>
+				</div>
+				<div class="box_logo fright">
+					<img src="<?php echo __IMG ;?>logo.png"/>
+				</div>
+			</div>
+			<div class="box_blur blur"></div>
+			<div class="box">
+				<div class="article" style="height:700px">
+					<div class="article_title">
+						<p>个人信息</p>
+					</div>
+					<div class="inbox phone_scro">
+			<form class="vip_information form-horizontal" method="post" action="{:U('User/edit')}" autocomplete="off">					<foreach name="res" item="val">
+							<div class="head_icon overf">
+								<span class="fleft">当前头像：</span>
+								<img class="fleft" src="{$val.headimg}"/>
+								<p class="fleft">
+									<a href="{:U('User/chang_head')}">(修改头像)</a><br /><a href="{:U('User/change_password')}">(修改密码)</a>
+								</p>
+							</div>
+							<div class="nick">
+								<span>昵称：</span><input type="text" class="form-control" name="name" value="{$val.name}" />
+							</div>
+							<div class="birth">
+								<span>生日：</span>							
+								<select class="form-control" name="birthyear"  >									<volist name="res_ymd2" id="v3">
+										<option value="{$v3.id}" <if condition="$val['birthyear'] eq $v3['id']">selected</if>>{$v3.name}</option>									</volist>
+								</select><span>年</span>
+								<select class="form-control" name="birthmonth" id="select4" onchange="change3()">									<option value="">请选择月份</option>									<volist name="res_ymd" id="v4">
+										<option value="{$v4.id}" <if condition="$val['birthmonth'] eq $v4['id']">selected</if>>{$v4.name}</option>									</volist>
+								</select><span>月</span>
+								<select class="form-control" name="birthday">
+									<option value="">请选择日期</option>
+								</select><span>日</span>
+							</div>
+							<div class="place">
+								<span>所在地：</span>
+								<div class="fleft">
+									<select class="form-control" name="province1" id="select1" onchange="change()">										<option value="-1">请选择所在（省、直辖市）</option>										<volist name="region2" id="va">
+										<option value="{$va.id}" <if condition="$val['province1'] eq $va['id']" >selected</if>>{$va.name}</option>										</volist>
+									</select>								
+									<select class="form-control" id="select2" name="city1" onchange="change2()">										
+										<option value="">请选择所在（市）</option>			
+									</select>
+									<select class="form-control" name="city3">										
+										<option value="">请选择所在（区、县）</option>										<volist name="region" id="va">										<option value="{$va.id}" <if condition="$val['city3'] eq $va['id']" >selected</if>>{$va.name}</option>
+										</volist>									</select>								
+								</div>
+								
+								<input type="text" class="form-control" name="street1" value="{$val.street1}" />
+							</div>
+							<div class="sex">								
+								<span>性别：</span>								<foreach name="sex" item="v1">
+								<label class="check">
+									<input type="radio" name="sex" value="{$v1.id}"<if condition="$val['sex'] eq $v1['id']">checked</if>/><span>{$v1.name}</span>
+								</label>								</foreach>
+							
+							</div>
+							<div class="mail">
+								<span>邮箱：</span><input type="text" name="email" class="form-control" value="{$val.email}" />
+							</div>					</foreach>
+							<div class="address overf">
+								<span class="fleft">收货地址：</span>
+								<div class="fleft">						<volist name="address" id="v2">									<div class="overf">																				<label class="check">											<input type="radio" value={$v2.id} name="address" <if condition="$v2['address_default'] eq 1">checked </if> />											<span style="line-height:23px">{$v2.province} {$v2.city} {$v2.city2} {$v2.street} （{$v2.name} 收）{$v2.tel} </span>										</label>									</div>								</volist>
+										
+									<a href="__MODULE__/User/add_address" class="add_new">添加新地址</a>									<span>（最多可保存6个）</span>									<a href="javascript:add_default()" class="add_new">设置选中地址为默认地址</a>									<a href="javascript:del()" class="add_new">删除选中地址</a>
+									
+								</div>								
+							</div>								<input type="submit" class="submit" value="确认" style="marign-top:100px"/>
+							
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<include file="Public/foot"/><script src="<?php echo __JS ;?>jquery.nicescroll.js" type="text/javascript" ></script><script src="<?php echo __JS ;?>scrollbar.js" type="text/javascript" ></script>
+<script>var city={$city};var city2={$city2};  function change(){	  var pid=$('#select1').val();	  $.post("{:U('User/change')}",{pid:pid},function(data){		  var str='<option value="0">请选择所在（市）</option>';		  $.each(data,function(k,v){			  if(city==v.id){				  str+='<option value="'+v.id+'" selected >'+v.name+'</option>';			  }else{				  str+='<option value="'+v.id+'">'+v.name+'</option>';			  }		  })		  $('select[name="city1"]').html(str);		 	  },'json')	  }  function change2(){	  var pid2=$('#select2').val();	  $.post("{:U('User/change')}",{pid:pid2},function(data){		  var str2='<option value="0">请选择所在（县/区）</option>';		  $.each(data,function(k,v){			  if(city2==v.id){				  str2+='<option value="'+v.id+'" selected >'+v.name+'</option>';			  }else{				  str2+='<option value="'+v.id+'">'+v.name+'</option>';			  }		  })		  $('select[name="city3"]').html(str2);	  },'json')  }  change();  var day={$day};  function change3(){	  var pid=$('#select4').val();	  $.post("{:U('User/change2')}",{pid:pid},function(data){		  var str='';		  $.each(data,function(k,v){			  if(day==v.id){				  str+='<option value="'+v.id+'" selected >'+v.name+'</option>';			  }else{				  str+='<option value="'+v.id+'">'+v.name+'</option>';			  }		  })		  $('select[name="birthday"]').html(str);		 	  },'json')	  } change3();  function del(){	 var radio=$('input[type="radio"]:checked');	 var str='';	 radio.each(function(){		 str=$(this).val();	 })	 if(confirm("确定删除该条地址记录？？")){		 $.post('{:U("User/del")}',{radio:str},function(data){			 if(data==-1){				 alert('该条地址是默认地址，请设置其他的为默认地址，再进行删除操作');				 return false;			 }else if(data==0){				 alert("删除失败");				 return false;			 }else if(data==1){				 alert("删除成功");				 location.reload();			 }		 },'json')	 }  }  function add_default(){	 var radio=$('input[type="radio"]:checked');	 var str='';	 radio.each(function(){		 str=$(this).val();	 })	 $.post('{:U("User/add_default")}',{radio:str},function(data){		 if(data==-1){			 alert("该条地址是默认地址，请设置其他的为默认地址，再进行修改操作");			 return false;		 }else if(data==0){			 alert("修改失败");			 return false;		 }else if(data==1){			 alert("修改成功");			 location.reload();		 }	 },'json')  }</script>
